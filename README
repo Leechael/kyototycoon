@@ -34,5 +34,22 @@ CloudFlare (github.com/cloudflare).
 Thanks.
 
 
+## Installation
+
+```
+$ ./configure
+$ make
+$ make install
+$ cd lab/leveldb
+$ make
+$ sudo cp ktplugdblevel.so /usr/local/lib
+```
+
+Highly recommended using ktserver with leveldb:
+
+```
+$ ktserver -pldb /usr/local/lib/ktplugdblevel.so /path/to/somewhere/casket.ldb
+```
+
 
 == END OF FILE ==
