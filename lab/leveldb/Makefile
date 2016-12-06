@@ -3,7 +3,11 @@ SHLIBFILES = ktplugdblevel.so
 CXX = g++
 CPPFLAGS = -I. -I.. -I../.. -I/usr/local/include -D_GNU_SOURCE=1 -D_FILE_OFFSET_BITS=64 -D_REENTRANT -D__EXTENSIONS__
 CXXFLAGS = -O2 -Wall -fPIC -fsigned-char
-LDFLAGS = -L. -L.. -L../.. -L/usr/local/lib -Wl,-rpath-link,.:..:../..:/usr/local/lib:.:/usr/local/lib:/usr/local/lib:. -Wl,--as-needed
+ifeq ($(shell uname -s),Darwin)
+	LDFLAGS = -L. -L.. -L../.. -L/usr/local/lib -Wl
+else
+	LDFLAGS = -L. -L.. -L../.. -L/usr/local/lib -Wl,-rpath-link,.:..:../..:/usr/local/lib:.:/usr/local/lib:/usr/local/lib:. -Wl,--as-needed
+endif
 LIBS = -lleveldb -lkyototycoon -lkyotocabinet
 
 
