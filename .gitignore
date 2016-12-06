@@ -1,0 +1,18 @@
+Makefile
+config.status
+kyototycoon.pc
+config.*
+
+# Output after make
+*.o
+*.dylib
+*.so
+ktremotemgr
+ktremotetest
+ktserver
+kttimedmgr
+kttimedtest
+ktutilmgr
+ktutilserv
+ktutiltest
+libkyototycoon.a
