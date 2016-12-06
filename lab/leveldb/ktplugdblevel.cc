@@ -16,6 +16,7 @@
 #include <ktplugdb.h>
 #include <leveldb/db.h>
 #include <leveldb/options.h>
+#include <leveldb/cache.h>
 #include <leveldb/comparator.h>
 #include <leveldb/iterator.h>
 #include <leveldb/write_batch.h>
@@ -276,6 +277,9 @@ class LevelDB : public kt::PluggableDB {
     if ((mode & OWRITER) && (mode & OTRUNCATE)) lv::DestroyDB(path, lv::Options());
     lv::Options options;
     if ((mode & OWRITER) && (mode & OCREATE)) options.create_if_missing = true;
+    options.write_buffer_size = 4LL*1024*1024*1024;
+    options.max_open_files = 10000;
+    options.block_cache = leveldb::NewLRUCache(4000LL * 1048576);
     lv::Status status = lv::DB::Open(options, fpath, &db_);
     if (!status.ok()) {
       set_error(_KCCODELINE_, Error::SYSTEM, "DB::Open failed");
